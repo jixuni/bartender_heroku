@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const db = require("./models/index");
 const config = require("config");
 const cors = require("cors");
@@ -23,6 +24,7 @@ if (!config.get("jwtPrivateKey")) {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "client/build")));
 app.use("/api/user", user);
 app.use("/api/beer", beer);
 app.use("/api/brewery", brewery);
@@ -33,6 +35,10 @@ app.use("/login", login);
 app.use("/api/review", review);
 app.use("/api/style", style);
 app.use("/api/type", type);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 // use { force: true } argument in sync to drop all tables
 db.sequelize.sync({ force: false }).then(() => {
