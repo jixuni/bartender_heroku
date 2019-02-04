@@ -1,7 +1,6 @@
 import http from "./httpService";
-import { apiUrl } from "../config/config.json";
 
-const apiEndpoint = `${apiUrl}/api/review`;
+const apiEndpoint = `/api/review`;
 
 export function getReviewByBeer(beerId) {
   return http.get(`${apiEndpoint}/beer/${beerId}`);

@@ -1,8 +1,7 @@
 import http from "./httpService";
-import { apiUrl } from "../config/config.json";
 import jwtDecode from "jwt-decode";
 
-const apiEndpoint = `${apiUrl}/login`;
+const apiEndpoint = `/login`;
 const tokenKey = "token";
 const ageKey = "over21";
 

@@ -1,7 +1,6 @@
 import http from "./httpService";
-import { apiUrl } from "../config/config.json";
 
-const apiEndpoint = `${apiUrl}/api/beer`;
+const apiEndpoint = `/api/beer`;
 
 export function getAllBeer() {
   return http.get(`${apiEndpoint}/all`);
