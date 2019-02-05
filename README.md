@@ -1,10 +1,10 @@
-## Bartender
+# Bartender
 
 This web application is developed using React JS for frontend and Express on the backend. It is using Sequelize ORM and a MySQL database.
 
-## To run the application locally:
+# To run the application locally:
 
-# Node/Express Backend
+## Node/Express Backend
 
 1. Download the repo
 2. On your terminal, run `npm install`
@@ -18,7 +18,7 @@ This web application is developed using React JS for frontend and Express on the
 6. Run `node index.js` to launch the Node backend
 7. If everything is configured correctly, the tables should be created for the local MySQL database and you can populate it with appropriate data
 
-# React JS Frontend
+## React JS Frontend
 
 1. On your terminal, run `cd client` and `npm install`
 2. Put your localhost url in `.env.development` file
@@ -37,6 +37,6 @@ This web application is developed using React JS for frontend and Express on the
 6. push your project to heroku using `git push heroku master`
 7. If everything works well, your project is now on heroku, go to the `heroku app URL` to see it.
 
-# NOTE: you will need to repopulate the JawsDB with data, visit the JawsDB on your Heroku dashboard for database credentials
+## NOTE: you will need to repopulate the JawsDB with data, visit the JawsDB on your Heroku dashboard for database credentials
 
-# NOTE: for any issues with the app, on your terminal, `heroku logs --tail` to see the details
+## NOTE: for any issues with the app, on your terminal, `heroku logs --tail` to see the details
