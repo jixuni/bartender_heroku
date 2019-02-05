@@ -37,6 +37,6 @@ This web application is developed using React JS for frontend and Express on the
 6. push your project to heroku using `git push heroku master`
 7. If everything works well, your project is now on heroku, go to the `heroku app URL` to see it.
 
-## NOTE: you will need to repopulate the JawsDB with data, visit the JawsDB on your Heroku dashboard for database credentials
+# NOTE: you will need to repopulate the JawsDB with data, visit the JawsDB on your Heroku dashboard for database credentials
 
-## NOTE: for any issues with the app, on your terminal, `heroku logs --tail` to see the details
+# NOTE: for any issues with the app, on your terminal, `heroku logs --tail` to see the details
