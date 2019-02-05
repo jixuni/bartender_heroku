@@ -4,6 +4,8 @@ import StarRatings from "react-star-ratings";
 import beerService from "../services/beerService";
 import reviewService from "../services/reviewService";
 import { toast } from "react-toastify";
+import getPlaceholder from "./../utils/getPlaceholder";
+import { Link } from "react-router-dom";
 
 class BeerDetail extends Component {
   state = {
@@ -55,14 +57,14 @@ class BeerDetail extends Component {
     const { beer, reviews, averageRating } = this.state;
     const brewery = { ...beer.Brewery };
     const flavor = { ...beer.Flavor };
-
+    const img = require.context("../img", true);
     return (
       <React.Fragment key={beer.id}>
         <div className="row">
           <div className="col-md-3" align="center">
             <img
-              className="img-responsive"
-              src="https://via.placeholder.com/200x250"
+              className="img-responsive beerImg"
+              src={img(getPlaceholder(beer.category_id))}
               alt=""
             />
           </div>
@@ -70,7 +72,9 @@ class BeerDetail extends Component {
             <div className="row">Name: {beer.name}</div>
             <div className="row">ABV: {beer.abv}</div>
             <div className="row">Flavor: {flavor.name}</div>
-            <div className="row">Brewery: {brewery.name}</div>
+            <div className="row">
+              Brewery: <Link to={`/brewery/${brewery.id}`}>{brewery.name}</Link>
+            </div>
             {averageRating && (
               <div className="row">
                 <p>Average Rating:</p>

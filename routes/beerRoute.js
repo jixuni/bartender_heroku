@@ -31,7 +31,7 @@ router.get("/:id", async (req, res) => {
     ]
   });
   if (!beer)
-    return res.status(401).send("Beer Not Found, it might have been removed");
+    return res.status(404).send("Beer Not Found, it might have been removed");
 
   res.send(beer);
 });

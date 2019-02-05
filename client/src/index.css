@@ -42,3 +42,9 @@ code {
 .fa-star-o {
   color: gold;
 }
+
+.beerImg,
+.breweryImg {
+  max-width: 200px;
+  max-height: 250px;
+}

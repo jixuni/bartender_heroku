@@ -9,6 +9,7 @@ import LoginForm from "./components/loginForm";
 import ReviewForm from "./components/reviewForm";
 import EditReviewForm from "./components/editReviewForm";
 import BeerDetail from "./components/beerDetail";
+import BreweryDetail from "./components/breweryDetail";
 import NotFound from "./components/notFound";
 import auth from "./services/authService";
 import ProtectedRoute from "./components/common/protectedRoute";
@@ -67,6 +68,7 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <Route path="/beers/:id" component={BeerDetail} />
+            <Route path="/brewery/:id" component={BreweryDetail} />
             <Route path="/beers" component={Beers} />
             <Route path="/not-found" component={NotFound} />
             <Redirect from="/" exact to="/beers" />
