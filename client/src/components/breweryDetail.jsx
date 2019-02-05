@@ -21,7 +21,7 @@ class BreweryDetail extends Component {
           <div className="col-md-3" align="center">
             <img
               className="img-responsive breweryImg"
-              src={img("./other.jpeg")}
+              src={img("./brewery_animated.gif")}
               alt=""
             />
           </div>
