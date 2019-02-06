@@ -94,7 +94,7 @@ class BeerDetail extends Component {
             <hr />
             <div className="col-12">{beer.description}</div>
             <hr />
-            {beer.id && (
+            {beer.abv && parseInt(beer.abv) !== 0 && (
               <div className="col-12">
                 <p>
                   After one drink of this beer within 1 hour, your Blood Alcohol

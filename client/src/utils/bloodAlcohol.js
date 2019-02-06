@@ -38,8 +38,9 @@ export function bac(alcoholStrength, gender) {
   // weight is in #
   // timepass is in number of hours e.g 3.5 hours = 3.5
   //humanConst is femaleConst or maleConst
-
-  if (gender.toLowerCase() === "m") {
+  if (parseInt(alcoholStrength) === 0) {
+    return 0;
+  } else if (gender.toLowerCase() === "m") {
     const numDrinks = alcoholConsume(1, parseFloat(alcoholStrength / 100), 12);
     const bac =
       (numDrinks * 5.14) / (avgMale.weight * avgMale.const) - 0.015 * 1;
