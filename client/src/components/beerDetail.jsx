@@ -6,6 +6,7 @@ import reviewService from "../services/reviewService";
 import { toast } from "react-toastify";
 import getPlaceholder from "./../utils/getPlaceholder";
 import { Link } from "react-router-dom";
+import { bac } from "./../utils/bloodAlcohol";
 
 class BeerDetail extends Component {
   state = {
@@ -73,21 +74,47 @@ class BeerDetail extends Component {
             <div className="row">ABV: {beer.abv}</div>
             <div className="row">Flavor: {flavor.name}</div>
             <div className="row">
-              Brewery: <Link to={`/brewery/${brewery.id}`}>{brewery.name}</Link>
+              Brewery:
+              <Link to={`/brewery/${brewery.id}`}>{brewery.name}</Link>
             </div>
             {averageRating && (
+              <React.Fragment>
+                <div className="row">Average Rating:</div>
+                <div className="row">
+                  <StarRatings
+                    rating={averageRating}
+                    starRatedColor="gold"
+                    starDimension="20px"
+                    numberOfStars={5}
+                    starSpacing="1px"
+                  />
+                </div>
+              </React.Fragment>
+            )}
+            <hr />
+            <div className="row">{beer.description}</div>
+            <hr />
+            {beer.id && (
               <div className="row">
-                <p>Average Rating:</p>
-                <StarRatings
-                  rating={averageRating}
-                  starRatedColor="gold"
-                  starDimension="20px"
-                  numberOfStars={5}
-                  starSpacing="1px"
-                />
+                <p>
+                  After one drink of this beer within 1 hour, your Blood Alcohol
+                  Level will be *:
+                </p>
+                <div className="col-6">{`Male: ${bac(beer.abv, "m")}%`}</div>
+                <div className="col-6">{`Female: ${bac(beer.abv, "f")}%`}</div>
+                <div className="col-12 disclaimer">
+                  * based on a 12oz serving, average American male and female
+                  weight and tolerance.{" "}
+                </div>
+                <div className="col-12 disclaimer">
+                  * Legal Blood Alcohol Limit is 0.08%{" "}
+                </div>
+                <div className="col-12 disclaimer">
+                  * PLEASE DON'T DRINK AND DRIVE
+                </div>
+                <p> </p>
               </div>
             )}
-            <div className="row">{beer.description}</div>
           </div>
         </div>
         <hr />
