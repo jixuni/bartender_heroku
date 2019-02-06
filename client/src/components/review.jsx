@@ -22,7 +22,7 @@ const Reviews = ({ data, onDelete, onModify }) => {
       <div className="col-md-4">
         <StarRatings
           rating={data.rating}
-          starRatedColor="gold"
+          starRatedColor="red"
           starDimension="15px"
           numberOfStars={5}
           starSpacing="1px"

@@ -70,20 +70,20 @@ class BeerDetail extends Component {
             />
           </div>
           <div className="col-md-9">
-            <div className="row">Name: {beer.name}</div>
-            <div className="row">ABV: {beer.abv}</div>
-            <div className="row">Flavor: {flavor.name}</div>
-            <div className="row">
-              Brewery:
+            <div className="col-12">Name: {beer.name}</div>
+            <div className="col-12">ABV: {beer.abv}</div>
+            <div className="col-12">Flavor: {flavor.name}</div>
+            <div className="col-12">Brewery:</div>
+            <div className="col-12">
               <Link to={`/brewery/${brewery.id}`}>{brewery.name}</Link>
             </div>
             {averageRating && (
               <React.Fragment>
-                <div className="row">Average Rating:</div>
-                <div className="row">
+                <div className="col-12">Average Rating:</div>
+                <div className="col-12">
                   <StarRatings
                     rating={averageRating}
-                    starRatedColor="gold"
+                    starRatedColor="red"
                     starDimension="20px"
                     numberOfStars={5}
                     starSpacing="1px"
@@ -92,27 +92,33 @@ class BeerDetail extends Component {
               </React.Fragment>
             )}
             <hr />
-            <div className="row">{beer.description}</div>
+            <div className="col-12">{beer.description}</div>
             <hr />
             {beer.id && (
-              <div className="row">
+              <div className="col-12">
                 <p>
                   After one drink of this beer within 1 hour, your Blood Alcohol
                   Level will be *:
                 </p>
-                <div className="col-6">{`Male: ${bac(beer.abv, "m")}%`}</div>
-                <div className="col-6">{`Female: ${bac(beer.abv, "f")}%`}</div>
-                <div className="col-12 disclaimer">
-                  * based on a 12oz serving, average American male and female
-                  weight and tolerance.{" "}
+                <div className="row">
+                  <div className="col-6">{`Male: ${bac(beer.abv, "m")}%`}</div>
+                  <div className="col-6">{`Female: ${bac(
+                    beer.abv,
+                    "f"
+                  )}%`}</div>
                 </div>
-                <div className="col-12 disclaimer">
-                  * Legal Blood Alcohol Limit is 0.08%{" "}
+                <div className="row mt-2">
+                  <div className="col-12 disclaimer">
+                    * based on a 12oz serving, average American male and female
+                    weight and tolerance.{" "}
+                  </div>
+                  <div className="col-12 disclaimer">
+                    * Legal Blood Alcohol Limit is 0.08%{" "}
+                  </div>
+                  <div className="col-12 disclaimer">
+                    * PLEASE DON'T DRINK AND DRIVE
+                  </div>
                 </div>
-                <div className="col-12 disclaimer">
-                  * PLEASE DON'T DRINK AND DRIVE
-                </div>
-                <p> </p>
               </div>
             )}
           </div>
