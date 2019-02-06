@@ -4,6 +4,7 @@ const db = require("../models");
 
 router.get("/all", async (req, res) => {
   let beer = await db.Beer.findAll({
+    // limit: 20,
     include: [
       {
         model: db.Brewery,
