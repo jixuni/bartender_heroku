@@ -57,6 +57,7 @@ class BeerDetail extends Component {
   render() {
     const { beer, reviews, averageRating } = this.state;
     const brewery = { ...beer.Brewery };
+    const style = { ...beer.Style };
     const flavor = { ...beer.Flavor };
     const img = require.context("../img", true);
     return (
@@ -77,6 +78,9 @@ class BeerDetail extends Component {
           </div>
           <div className="row">
             <div className="col-12">Flavor: {flavor.name}</div>
+          </div>
+          <div className="row">
+            <div className="col-12">Style: {style.name}</div>
           </div>
           <div className="row">
             <div className="col-12">
