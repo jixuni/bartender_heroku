@@ -60,46 +60,58 @@ class BeerDetail extends Component {
     const flavor = { ...beer.Flavor };
     const img = require.context("../img", true);
     return (
-      <React.Fragment key={beer.id}>
-        <div className="row">
-          <div className="col-md-3" align="center">
-            <img
-              className="img-responsive beerImg"
-              src={img(getPlaceholder(beer.category_id))}
-              alt=""
-            />
-          </div>
-          <div className="col-md-9">
+      <div key={beer.id} className="row">
+        <div className="col-md-3" align="center">
+          <img
+            className="img-responsive beerImg"
+            src={img(getPlaceholder(beer.category_id))}
+            alt=""
+          />
+        </div>
+        <div className="col-md-9">
+          <div className="row">
             <div className="col-12">Name: {beer.name}</div>
+          </div>
+          <div className="row">
             <div className="col-12">ABV: {beer.abv}</div>
+          </div>
+          <div className="row">
             <div className="col-12">Flavor: {flavor.name}</div>
-            <div className="col-12">Brewery:</div>
+          </div>
+          <div className="row">
             <div className="col-12">
-              <Link to={`/brewery/${brewery.id}`}>{brewery.name}</Link>
+              Brewery: <Link to={`/brewery/${brewery.id}`}>{brewery.name}</Link>
             </div>
-            {averageRating && (
-              <React.Fragment>
-                <div className="col-12">Average Rating:</div>
-                <div className="col-12">
-                  <StarRatings
-                    rating={averageRating}
-                    starRatedColor="red"
-                    starDimension="20px"
-                    numberOfStars={5}
-                    starSpacing="1px"
-                  />
-                </div>
-              </React.Fragment>
-            )}
-            <hr />
-            <div className="col-12">{beer.description}</div>
-            <hr />
-            {beer.abv && parseInt(beer.abv) !== 0 && (
+          </div>
+
+          {averageRating && (
+            <div className="row">
+              <div className="col-12">Average Rating:</div>
               <div className="col-12">
-                <p>
-                  After one drink of this beer within 1 hour, your Blood Alcohol
-                  Level will be *:
-                </p>
+                <StarRatings
+                  rating={averageRating}
+                  starRatedColor="red"
+                  starDimension="20px"
+                  numberOfStars={5}
+                  starSpacing="1px"
+                />
+              </div>
+            </div>
+          )}
+
+          {beer.description && (
+            <React.Fragment>
+              <hr />
+              <div className="col-12">{beer.description}</div>
+            </React.Fragment>
+          )}
+
+          {beer.abv && parseInt(beer.abv) !== 0 && (
+            <React.Fragment>
+              <hr />
+              <div className="col-12">
+                After one drink of this beer within one hour, your Blood Alcohol
+                Level will be *:
                 <div className="row">
                   <div className="col-6">{`Male: ${bac(beer.abv, "m")}%`}</div>
                   <div className="col-6">{`Female: ${bac(
@@ -120,18 +132,20 @@ class BeerDetail extends Component {
                   </div>
                 </div>
               </div>
-            )}
-          </div>
+            </React.Fragment>
+          )}
         </div>
-        <hr />
-        <div className="row">
+
+        <div className="col-12" align="right">
+          <hr />
           <button
             onClick={() => this.handleReview(beer.id)}
-            className="btn btn-primary ml-auto"
+            className="btn btn-primary"
           >
             Write a review
           </button>
         </div>
+
         {reviews.map(r => (
           <Reviews
             key={r.id}
@@ -140,7 +154,7 @@ class BeerDetail extends Component {
             onModify={this.handleEdit}
           />
         ))}
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -101,7 +101,6 @@ class Beers extends Component {
           onPageNext={this.handlePageNext}
           onPagePrevious={this.handlePagePrevious}
         />
-
         <div className="row">
           {beers.map(beer => (
             <Beer key={beer.id} data={beer} />

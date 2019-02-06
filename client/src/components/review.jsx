@@ -8,42 +8,49 @@ const Reviews = ({ data, onDelete, onModify }) => {
   const user = auth.getCurrentUser();
 
   return (
-    <div className="row border border-primary mt-2 mb-2 p-2">
+    <div className="col-12">
+      <hr />
       {data.Beer && (
-        <div className="col-12">
-          Review for:{" "}
-          <Link to={`/beers/${data.Beer.id}`}>{data.Beer.name}</Link>
+        <div className="row">
+          <div className="col-12">
+            Review for:{" "}
+            <Link to={`/beers/${data.Beer.id}`}>{data.Beer.name}</Link>
+          </div>
         </div>
       )}
-      <div className="col-12">{data.title}</div>
-      <div className="col-md-4">
-        <p>{data.User.name}</p>
+      <div className="row">
+        <div className="col-md-4">{data.User.name}</div>
+        <div className="col-md-4 font-weight-bold">
+          <StarRatings
+            rating={data.rating}
+            starRatedColor="red"
+            starDimension="20px"
+            numberOfStars={5}
+            starSpacing="1px"
+          />
+        </div>
+
+        <div className="col-md-4">
+          <Moment format="YYYY-MM-DD hh:mm A">{data.updated_at}</Moment>
+        </div>
       </div>
-      <div className="col-md-4">
-        <StarRatings
-          rating={data.rating}
-          starRatedColor="red"
-          starDimension="15px"
-          numberOfStars={5}
-          starSpacing="1px"
-        />
+      <div className="row">
+        <div className="col-12 font-weight-bold">{data.title}</div>
+        <div className="col-12">{data.comment}</div>
       </div>
-      <div className="col-md-4">
-        <Moment format="YYYY-MM-DD hh:mm A">{data.updated_at}</Moment>
-      </div>
-      <div className="col-12">{data.comment}</div>
       {user && user.id === data.User.id && (
-        <React.Fragment>
+        <div className="col-12">
           <button
             onClick={() => onModify(data.id)}
             className="btn btn-primary m-2"
           >
             Edit
           </button>
+
           <button onClick={() => onDelete(data)} className="btn btn-danger m-2">
             Delete
           </button>
-        </React.Fragment>
+        </div>
       )}
     </div>
   );

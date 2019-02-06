@@ -5,7 +5,7 @@ import getPlaceholder from "./../utils/getPlaceholder";
 const Beer = ({ data }) => {
   const img = require.context("../img", true);
   return (
-    <div key={data.id} className="col-md-6 col-lg-3" align="center">
+    <div className="col-md-4 col-lg-3" align="center">
       <Link to={`/beers/${data.id}`}>
         <img
           className="img-responsive beerImg"
@@ -13,7 +13,7 @@ const Beer = ({ data }) => {
           alt=""
         />
       </Link>
-      <p>{data.name}</p>
+      <div className="col-12">{data.name}</div>
     </div>
   );
 };

@@ -56,7 +56,7 @@ class App extends Component {
           onClose={this.handleClose}
           onUnderAge={this.handleUnderAge}
         />
-        <main className="container mt-4">
+        <main className="container-fluid mt-4">
           <Switch>
             <Route path="/register" component={RegisterForm} />
             <ProtectedRoute
