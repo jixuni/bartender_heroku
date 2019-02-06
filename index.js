@@ -4,7 +4,7 @@ const path = require("path");
 const db = require("./models/index");
 const config = require("config");
 const cors = require("cors");
-const compression = require("compression");
+const expressStaticGzip = require("express-static-gzip");
 const beer = require("./routes/beerRoute");
 const brewery = require("./routes/breweryRoute");
 const category = require("./routes/categoryRoute");
@@ -23,10 +23,17 @@ if (!config.get("jwtPrivateKey")) {
 }
 
 app.use(cors());
-app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "client/build")));
+app.use(
+  expressStaticGzip(path.join(__dirname, "client/build"), {
+    enableBrotli: true,
+    orderPreference: ["br", "gz"],
+    setHeaders: function(res, path) {
+      res.setHeader("Cache-Control", "public, max-age=31536000");
+    }
+  })
+);
 app.use("/api/user", user);
 app.use("/api/beer", beer);
 app.use("/api/brewery", brewery);
