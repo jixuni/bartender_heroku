@@ -39,9 +39,9 @@ class Beers extends Component {
   handlePageNext = async () => {
     const newPage = this.state.currentPage + 1;
     const newStartId = this.state.endId + 1;
-    const newEndId = this.state.endId + this.state.pageSize;
+    const newEndId = this.state.endId + this.state.pageSize * 2;
     const existingBeerList = [...this.state.beers];
-    if (this.state.endId <= existingBeerList.length) {
+    if (this.state.startId <= existingBeerList.length) {
       const beerList = await getAllBeer(newStartId, newEndId);
       const newBeers = [].concat.apply([], beerList.data);
       const beers = [...existingBeerList, ...newBeers];
