@@ -9,7 +9,7 @@ const SearchBox = ({ value, handleSearch }) => {
       className="form-control my-3"
       placeholder="Search..."
       value={value}
-      onChange={e => handleSearch(e.currentTarget.value)}
+      onKeyPress={e => handleSearch(e.key, e.currentTarget.value)}
     />
   );
 };

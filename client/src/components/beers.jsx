@@ -4,21 +4,28 @@ import paginate from "../utils/paginate";
 import Pagination from "./common/pagination";
 import Beer from "./beer";
 import _ from "lodash";
-import { getAllBeer } from "./../services/beerService";
+import {
+  getAllBeer,
+  searchBeer,
+  searchBeerByCategory
+} from "./../services/beerService";
 import { getAllCategory } from "./../services/categoryService";
 
 class Beers extends Component {
   state = {
     beers: [],
+    searchBeers: [],
     categories: [],
     pageSize: 8,
+    startId: 1,
+    endId: 40,
     currentPage: 1,
     searchQuery: "",
     catQuery: ""
   };
 
   async componentDidMount() {
-    const beerList = await getAllBeer();
+    const beerList = await getAllBeer(this.state.startId, this.state.endId);
     const beers = [].concat.apply([], beerList.data);
     const categoryList = await getAllCategory();
     const categories = [].concat.apply([], categoryList.data);
@@ -29,9 +36,24 @@ class Beers extends Component {
     this.setState({ currentPage: page });
   };
 
-  handlePageNext = () => {
+  handlePageNext = async () => {
     const newPage = this.state.currentPage + 1;
-    this.setState({ currentPage: newPage });
+    const newStartId = this.state.endId + 1;
+    const newEndId = this.state.endId + this.state.pageSize;
+    const existingBeerList = [...this.state.beers];
+    if (this.state.endId <= existingBeerList.length) {
+      const beerList = await getAllBeer(newStartId, newEndId);
+      const newBeers = [].concat.apply([], beerList.data);
+      const beers = [...existingBeerList, ...newBeers];
+      this.setState({
+        beers,
+        currentPage: newPage,
+        startId: newStartId,
+        endId: newEndId
+      });
+    } else {
+      this.setState({ currentPage: newPage });
+    }
   };
 
   handlePagePrevious = () => {
@@ -39,30 +61,25 @@ class Beers extends Component {
     this.setState({ currentPage: newPage });
   };
 
-  handleSort = sortColumn => {
-    this.setState({ sortColumn });
-  };
+  // handleSort = sortColumn => {
+  //   this.setState({ sortColumn });
+  // };
 
   getPageData = () => {
     const {
       pageSize,
       currentPage,
+      searchBeers,
       beers: allBeers,
       searchQuery,
       catQuery
     } = this.state;
 
-    // set the filteredMovie to allMovies, and change the filteredMovie array based on the conditions below, (searchQuery or Selected Genre)
-    let filteredBeer = allBeers;
-
-    if (searchQuery) {
-      filteredBeer = allBeers.filter(m =>
-        m.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    } else if (catQuery) {
-      filteredBeer = allBeers.filter(
-        m => m.category_id.toString() === catQuery
-      );
+    let filteredBeer = [];
+    if (searchQuery || catQuery) {
+      filteredBeer = searchBeers;
+    } else {
+      filteredBeer = allBeers;
     }
 
     // paginate the list of movies based on the sorted list
@@ -70,16 +87,28 @@ class Beers extends Component {
     return { totalCount: filteredBeer.length, data: beers };
   };
 
-  handleSearch = query => {
-    this.setState({
-      searchQuery: query,
-      catQuery: "",
-      currentPage: 1
-    });
+  handleSearch = async (key, query) => {
+    if (key === "Enter") {
+      const beerList = await searchBeer(query);
+      const searchBeers = [].concat.apply([], beerList.data);
+      this.setState({
+        searchBeers,
+        searchQuery: query,
+        catQuery: "",
+        currentPage: 1
+      });
+    }
   };
 
-  handleFilter = query => {
-    this.setState({ catQuery: query, searchQuery: "", currentPage: 1 });
+  handleFilter = async query => {
+    const beerList = await searchBeerByCategory(query);
+    const searchBeers = [].concat.apply([], beerList.data);
+    this.setState({
+      searchBeers,
+      catQuery: query,
+      searchQuery: "",
+      currentPage: 1
+    });
   };
 
   render() {
