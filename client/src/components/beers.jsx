@@ -44,7 +44,6 @@ class Beers extends Component {
     const beerList = await getAllBeer(newStartId, newEndId);
     const newBeers = [].concat.apply([], beerList.data);
     const beers = [...existingBeerList, ...newBeers];
-    console.log(beers);
     this.setState({
       beers,
       currentPage: newPage,
