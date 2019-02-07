@@ -3,7 +3,6 @@ import Filter from "./filter";
 import paginate from "../utils/paginate";
 import Pagination from "./common/pagination";
 import Beer from "./beer";
-import _ from "lodash";
 import {
   getAllBeer,
   searchBeer,
@@ -38,6 +37,8 @@ class Beers extends Component {
 
   handlePageNext = async () => {
     const newPage = this.state.currentPage + 1;
+    this.setState({ currentPage: newPage });
+
     const newStartId = this.state.endId + 1;
     const newEndId = this.state.endId + this.state.pageSize * 2;
     const existingBeerList = [...this.state.beers];
@@ -46,7 +47,6 @@ class Beers extends Component {
     const beers = [...existingBeerList, ...newBeers];
     this.setState({
       beers,
-      currentPage: newPage,
       startId: newStartId,
       endId: newEndId
     });

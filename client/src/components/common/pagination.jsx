@@ -17,9 +17,9 @@ const Pagination = props => {
     <nav>
       <ul className="pagination justify-content-center">
         <li className={currentPage === 1 ? "page-item disabled" : "page-item"}>
-          <a className="page-link" onClick={() => onPagePrevious()}>
+          <button className="page-link" onClick={() => onPagePrevious()}>
             {"<<"}
-          </a>
+          </button>
         </li>
         <li key={currentPage} className="page-item active page-link">
           {currentPage}
@@ -31,9 +31,9 @@ const Pagination = props => {
               : "page-item"
           }
         >
-          <a className="page-link" onClick={() => onPageNext()}>
+          <button className="page-link" onClick={() => onPageNext()}>
             {">>"}
-          </a>
+          </button>
         </li>
       </ul>
     </nav>

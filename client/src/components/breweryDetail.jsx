@@ -30,7 +30,11 @@ class BreweryDetail extends Component {
           </div>
           <div className="row">
             <div className="col-12">
-              <a href={brewery.website} target="_blank">
+              <a
+                href={brewery.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Brewery Website
               </a>
             </div>
