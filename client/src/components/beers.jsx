@@ -57,10 +57,6 @@ class Beers extends Component {
     this.setState({ currentPage: newPage });
   };
 
-  // handleSort = sortColumn => {
-  //   this.setState({ sortColumn });
-  // };
-
   getPageData = () => {
     const {
       pageSize,
